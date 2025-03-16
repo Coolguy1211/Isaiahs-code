@@ -26,7 +26,7 @@
 <p>Select a drink:</p>
 <br>
 <select id="drink">
-<option value="none1">None</option>
+<option value="none1">None</option onchange = "drinkSelection()">
     <option value="water">Water</option>
     <option value="orange-juice"> Orange Juice</option>
     <option value="coke">Coke</option>
@@ -44,6 +44,12 @@ function snackSelection() {
 
 const selectedSnack=document.getElementById("snack").value
 document.getElementById("snack-select").innerHTML="You have selected: "+"<strong>" +selectedSnack+"</strong>"
+}
+
+function drinkSelection() {
+
+const selectedDrink=document.getElementById("drink").value
+document.getElementById("drink-select").innerHTML="You have selected: "+"<strong>" +selectedDrink+"</strong>"
 }
 
 </script>
