@@ -1,0 +1,28 @@
+<body>
+
+    <p>Select a snack:</p>
+    <br>
+    <select id="snack" onchange = "">
+        <option data-price="0.00" value="none">None</option>
+        <option data-price="1.50" value="cookies">Cookies</option>
+        <option data-price="1.75" value="chips">Chips</option>
+    
+    </select>
+    <br>
+    <p id="price">Price $0.00</p>
+
+    <script>
+function updatePrice() {
+    const dropdown = document.querySelector('#snack')
+    const selectedOption = dropdown.options[dropdown.selectedIndex];
+    const price = selectedOption.getAttribute("data-price");
+    const numericPrice = parseFloat(price); 
+const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
+document.querySelector('#price').innerHTML = "Price $" + formattedPrice;
+
+
+
+
+    </script>
+    
+    </body>
