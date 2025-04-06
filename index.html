@@ -1,59 +1,38 @@
-<html>
-<head>
-<style>
-    form{
-        width:300px;
-        background-color: rgb(247, 0, 0);
-        padding: 10px 10px 10px 10px;
-        margin:0 auto;
-    }
-</style>
-</head>
 <body>
-<form id="snack-drink">
-<p>Select a snack:</p>
-<br>
-<select id="snack" onchange = "snackSelection()">
-<option value="none">None</option>
-    <option data-price="1.00$" value="cookies">Cookies (1.00$)</option>
-    <option data-price="1.00$" value="chips">Chips(1.00$) </option>
-    <option data-price="1.00$" value="cupcakes">Cupcakes(1.00$) </option>
-    <option data-price="1.00$" value="popcorn">Popcorn (1.00$) </option>
-    <option data-price="1.00$" value="other">Other (1.00$)</option>
+
+    <p>Select a snack:</p>
+    <select id="snack" onchange = "priceUpdate()">
+        <option value="none" data-price = "0.00">None</option>
+        <option value="cookies" data-price = "1.50">Cookies</option>
+        <option value="chips" data-price = "1.75">Chips</option>
     
-</select>
-<br>
-<p>Select a drink:</p>
-<br>
-<select id="drink" onchange = "drinkSelection()">
-<option value="none1">None</option>">
-    <option data-price="1.00$" value="water">Water (1.00$)</option>
-    <option data-price="1.00$" value="orange-juice"> Orange Juice (1.00$)</option>
-    <option data-price="1.00$" value="coke">Coke (1.00$)</option>
-    <option data-price="1.00$" value="pepsi">Pepsi (1.00$)</option>
-    <option data-price="1.00$" value="other1">Other (1.00$)</option>
+    </select>
+    <br>
+    <p id = "priceDisplay">Price $0.00</p>
     
-</select>
-</form>
-<p id="snack-select">You have selected: <strong>NONE</strong></p>
-<p id="drink-select">You have selected: <strong>NONE</strong></p>
-<p>for the new code go to /new.html</p>
-<script>
-
-function snackSelection() {
-
-const selectedSnack=document.getElementById("snack").value
-document.getElementById("snack-select").innerHTML="You have selected: "+"<strong>" +selectedSnack+"</strong>"
-}
-
-function drinkSelection() {
-
-const selectedDrink=document.getElementById("drink").value
-document.getElementById("drink-select").innerHTML="You have selected: "+"<strong>" +selectedDrink+"</strong>"
-}
-
-
-</script>
-
-</body>
-</html>
+    
+    <script>
+    
+    function priceUpdate(){
+    // first, identify the dropdown
+    const dropdown = document.querySelector('#snack')
+    // second, identify the option chosen by the user
+    const selectedOption = dropdown.options[dropdown.selectedIndex];
+    // third, read the data-price of the selected option
+    const price = selectedOption.getAttribute("data-price");
+    const numericPrice = parseFloat(price); 
+    const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
+    document.getElementById("priceDisplay").innerHTML="Your total $: "+"<strong>" +formattedPrice+"</strong>"
+    
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    </script>
+    
+    </body>
