@@ -22,6 +22,7 @@
     <p id = "total-price">Total Price $0.00</p>
     <script>
     
+    // function #1
     function priceUpdate(){
     // first, identify the dropdown
     const dropdown = document.querySelector('#snack')
@@ -33,11 +34,12 @@
     const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
     document.getElementById("priceDisplay").innerHTML="Snack Price $: "+"<strong>" +formattedPrice+"</strong>"
     
-    
+    return formattedPrice
     
     
     }
     
+    //function #2 
     function priceUpdateDrink(){
     // first, identify the dropdown
     const dropdown = document.querySelector('#drink')
@@ -49,9 +51,20 @@
     const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
     document.getElementById("priceDisplayDrink").innerHTML="Drink Price $: "+"<strong>" +formattedPrice+"</strong>"
     
+    return formattedPrice
     
     
+    }
     
+    // function #3 
+    
+    function showTotal(){
+        
+        let total = priceUpdateDrink + priceUpdate
+        
+        document.getElementById("total-price").innerHTML = "Total Price $:"+" <strong>" + total+ "</strong>"
+        
+        
     }
     
     
