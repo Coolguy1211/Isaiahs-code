@@ -8,36 +8,18 @@
     
     </select>
     <br>
-
     <p>Select a drink:</p>
-    <select id="drink" onchange = "priceUpdatedrink()">
+    <select id="drink" onchange = "priceUpdateDrink()">
         <option value="none" data-price = "0.00">None</option>
-        <option value="cookies" data-price = "1.50">water</option>
-        <option value="chips" data-price = "1.75">zevia</option>
+        <option value="cookies" data-price = "1.50">Coke</option>
+        <option value="chips" data-price = "1.75">Pepsi</option>
     
     </select>
-    <p id = "priceDisplay">Price $0.00</p>
-    <body>
-
-    <p>Select a snack:</p>
-    <select id="snack" onchange = "priceUpdate()">
-        <option value="none" data-price = "0.00">None</option>
-        <option value="cookies" data-price = "1.50">Cookies</option>
-        <option value="chips" data-price = "1.75">Chips</option>
     
-    </select>
-    <br>
-
-    <p>Select a drink:</p>
-    <select id="drink" onchange = "priceUpdatedrink()">
-        <option value="none" data-price = "0.00">None</option>
-        <option value="cookies" data-price = "1.50">water</option>
-        <option value="chips" data-price = "1.75">zevia</option>
     
-    </select>
-    <p id = "priceDisplay">Price $0.00</p>
-    <p id = "priceDisplaydrink">Price $0.00</p>
-    
+    <p id = "priceDisplay">Snack Price $0.00</p>
+    <p id = "priceDisplayDrink">Drink Price $0.00</p>
+    <p id = "total-price">Total Price $0.00</p>
     <script>
     
     function priceUpdate(){
@@ -49,46 +31,7 @@
     const price = selectedOption.getAttribute("data-price");
     const numericPrice = parseFloat(price); 
     const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
-    document.getElementById("priceDisplay").innerHTML="Your total $: "+"<strong>" +formattedPrice+"</strong>"
-
-    function priceUpdatedrink(){
-    // first, identify the dropdown
-    const dropdown = document.querySelector('#drink')
-    // second, identify the option chosen by the user
-    const selectedOption = dropdown.options[dropdown.selectedIndex];
-    // third, read the data-price of the selected option
-    const price = selectedOption.getAttribute("data-price");
-    const numericPrice = parseFloat(price); 
-    const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
-    document.getElementById("priceDisplay").innerHTML="Your total $: "+"<strong>" +formattedPrice+"</strong>"
-    
-    
-    
-    
-    
-    }
-    
-    
-    
-    
-    
-    </script>
-    
-    </body>
-    
-    
-    <script>
-    
-    function priceUpdate(){
-    // first, identify the dropdown
-    const dropdown = document.querySelector('#snack')
-    // second, identify the option chosen by the user
-    const selectedOption = dropdown.options[dropdown.selectedIndex];
-    // third, read the data-price of the selected option
-    const price = selectedOption.getAttribute("data-price");
-    const numericPrice = parseFloat(price); 
-    const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
-    document.getElementById("priceDisplay").innerHTML="Your total $: "+"<strong>" +formattedPrice+"</strong>"
+    document.getElementById("priceDisplay").innerHTML="Snack Price $: "+"<strong>" +formattedPrice+"</strong>"
     
     
     
