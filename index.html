@@ -32,6 +32,17 @@
     const numericPrice = parseFloat(price); 
     const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
     document.getElementById("priceDisplay").innerHTML="Snack Price $: "+"<strong>" +formattedPrice+"</strong>"
+// fourth, update the price display
+const priceDisplay = document.getElementById("priceDisplay");
+priceDisplay.innerHTML = "Snack Price $: " + "<strong>" + formattedPrice + "</strong>";
+// fifth, update the total price
+const drinkDropdown = document.querySelector('#drink');
+const selectedDrinkOption = drinkDropdown.options[drinkDropdown.selectedIndex];
+const drinkPrice = selectedDrinkOption.getAttribute("data-price");
+const numericDrinkPrice = parseFloat(drinkPrice);
+const formattedDrinkPrice = numericDrinkPrice.toFixed(2); // This will round and format to two decimal places
+const totalPrice = numericPrice + numericDrinkPrice;
+
     
     
     
