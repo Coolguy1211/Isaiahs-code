@@ -1,34 +1,5 @@
 <body>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-    }
-    
-    h1 {
-        color: #333;
-    }
-    
-    select {
-        margin-bottom: 10px;
-        padding: 5px;
-    }
-    
-    button {
-        padding: 10px 15px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
 
-
-
-
-
-</style>
     <p>Select a snack:</p>
     <select id="snack" onchange = "priceUpdate(); showTotal();">
         <option value="none" data-price = "0.00">None</option>
@@ -45,8 +16,7 @@
         <option value="chips" data-price = "1.75">Pepsi</option>
     
     </select>
-    <button>Submit</button>
-    
+    <button onclick="window.location.href='checkout.html'">Go to Checkout</button>
     <p id = "priceDisplay">Snack Price $0.00</p>
     <p id = "priceDisplayDrink">Drink Price $0.00</p>
     <p id = "total-price">Total Price $0.00</p>
