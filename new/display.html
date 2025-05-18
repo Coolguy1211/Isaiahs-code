@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>User Info</h2>
+    <p id="userInfo"></p>
+    <script>
+       // find the uri
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name') || '';
+        const age = params.get('age') || '';
+        const city = params.get('city') || '';
+        document.getElementById('userInfo').textContent = 
+            `Name: ${name}, Age: ${age}, City: ${city}`;
+    </script>
+</body>
+</html>

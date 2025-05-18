@@ -1,0 +1,16 @@
+<input type="text" id="name" placeholder="Your Name">
+<br>
+<input type="number" id="age" placeholder="Your Age">
+<br>
+<input type="text" id="city" placeholder="Your City">
+<br>
+<button onclick="goToNextPage()">Submit</button>
+
+<script>
+function goToNextPage() {
+    const name = encodeURIComponent(document.getElementById('name').value);
+    const age = encodeURIComponent(document.getElementById('age').value);
+    const city = encodeURIComponent(document.getElementById('city').value);
+    window.location.href = `display.html?name=${name}&age=${age}&city=${city}`;
+}
+</script>
