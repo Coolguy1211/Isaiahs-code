@@ -12,11 +12,11 @@
     <p>Select a drink:</p>
     <select id="drink" onchange = "priceUpdateDrink(); showTotal()">
         <option value="none" data-price = "0.00">None</option>
-        <option value="cookies" data-price = "1.50">Coke</option>
-        <option value="chips" data-price = "1.75">Pepsi</option>
+        <option value="coke" data-price = "1.50">Coke</option>
+        <option value="pepsi" data-price = "1.75">Pepsi</option>
     
     </select>
-    <button onclick="window.location.href='checkout.html';">submit</button>
+    <button onclick="gotocheckout();">submit</button>
     
     <p id = "priceDisplay">Snack Price $0.00</p>
     <p id = "priceDisplayDrink">Drink Price $0.00</p>
@@ -69,9 +69,25 @@
         document.getElementById("total-price").innerHTML = "Total Price $:"+" <strong>" + total+ "</strong>"
     
     
+
     }
     
-    
+    function gotocheckout(){
+        // get the values of the dropdowns
+        const snack = document.querySelector('#snack').value;
+        const drink = document.querySelector('#drink').value;
+
+        // get the prices
+        const snackPrice = priceUpdate();
+        const drinkPrice = priceUpdateDrink();
+        const total = (snackPrice + drinkPrice).toFixed(2);
+
+        // build the URL with query parameters
+        const url = `checkout.html?snack=${encodeURIComponent(snack)}&drink=${encodeURIComponent(drink)}&total=${total}`;
+
+        // redirect to checkout.html with parameters
+        window.location.href = url;
+    }
     
     
     

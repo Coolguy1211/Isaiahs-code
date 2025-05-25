@@ -1,12 +1,33 @@
 <body>
 
-
-
-
     <h1>Checkout</h1>
-<a href="index.html">Return to Home</a>
+    <a href="index.html">Return to Home</a>
 
+    <p id="snack"></p>
+    <p id="drink"></p>
+    <p id="total"></p>
+    <p id="order-id"></p>
 
+    <script>
+        // Parse URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const snack = params.get('snack') || 'None';
+        const drink = params.get('drink') || 'None';
+        const total = params.get('total') || '0.00';
 
+        // Display values
+        document.getElementById('snack').innerHTML = "Snack: <strong>" + snack + "</strong>";
+        document.getElementById('drink').innerHTML = "Drink: <strong>" + drink + "</strong>";
+        document.getElementById('total').innerHTML = "Total Price: <strong>$" + total + "</strong>";
+
+        // Generate order ID: first 2 letters of snack + first 2 letters of drink + 2 random digits
+        function getFirstTwo(str) {
+            return (str && str.length >= 2) ? str.substring(0,2).toUpperCase() : (str + "X").substring(0,2).toUpperCase();
+        }
+        const randomDigits = Math.floor(10 + Math.random() * 90); // two random digits
+        const orderId = getFirstTwo(snack) + getFirstTwo(drink) + randomDigits;
+
+        document.getElementById('order-id').innerHTML = "Order ID: <strong>" + orderId + "</strong>";
+    </script>
 
 </body>
