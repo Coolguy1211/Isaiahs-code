@@ -22,7 +22,7 @@
 
         // Generate order ID: first 2 letters of snack + first 2 letters of drink + 2 random digits
         function getFirstTwo(str) {
-            return (str && str.length >= 2) ? str.substring(0,2).toUpperCase() : (str + "X").substring(0,2).toUpperCase();
+            return (str + "XX").substring(0,2).toUpperCase();
         }
         const randomDigits = Math.floor(10 + Math.random() * 90); // two random digits
         const orderId = getFirstTwo(snack) + getFirstTwo(drink) + randomDigits;
