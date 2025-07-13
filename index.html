@@ -23,13 +23,13 @@
     <!--toppings selection-->
     <h3>Choose Toppings...</h3>
 
-    <input type="checkbox" id="mushroom" name="toppings" value="MUSHROOM">
+    <input type="checkbox" id="mushroom" name="toppings" value="MUSHROOM:1.50">
     <label for ="mushroom">Mushroom</label><br>
 
-     <input type="checkbox" id="olive" name="toppings" value="OLIVE">
+     <input type="checkbox" id="olive" name="toppings" value="OLIVE:1.00">
     <label for ="olive">Olive</label><br>
 
-     <input type="checkbox" id="bell-pepper" name="toppings" value="BELL-PEPPER">
+     <input type="checkbox" id="bell-pepper" name="toppings" value="BELL-PEPPER:1.25">
     <label for ="bell-pepper">Bell Pepper</label><br>
 
 
@@ -46,7 +46,7 @@
 
 
         <script>
-            const checkboxes = document.querySelectorAll('input[name="toppings"]');
+    const checkboxes = document.querySelectorAll('input[name="toppings"]');
     const toppingTag = document.getElementById("selectedtoppings");
 
     const radios = document.querySelectorAll('input[name="pizza_size"]');
@@ -54,12 +54,32 @@
 
     const totalPrice = document.getElementById("totalPrice");
 
-    // Function to update selected toppings
-    function updateToppings() {
+    function getSelectedSizePrice() {
+      let price = 0;
+      radios.forEach(radio => {
+        if (radio.checked) {
+          price = parseFloat(radio.value.split(":")[1]);
+        }
+      });
+      return price;
+    }
+
+    function getSelectedToppingsPrice() {
+      let price = 0;
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          price += parseFloat(checkbox.value.split(":")[1]);
+        }
+      });
+      return price;
+    }
+
+    function updateAll() {
+      // Update toppings text
       const selectedToppings = [];
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-          selectedToppings.push(checkbox.value);
+          selectedToppings.push(checkbox.value.split(":")[0]);
         }
       });
       if (selectedToppings.length > 0) {
@@ -67,23 +87,31 @@
       } else {
         toppingTag.textContent = "Topping(s) Selected: None";
       }
+
+      // Update size text
+      let sizeName = "None";
+      radios.forEach(radio => {
+        if (radio.checked) {
+          sizeName = radio.value.split(":")[0];
+        }
+      });
+      selectedSize.textContent = `Selected size: ${sizeName}`;
+
+      // Update total price
+      const total = getSelectedSizePrice() + getSelectedToppingsPrice();
+      totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;
     }
 
-    // Add event listeners to checkboxes
     checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', updateToppings);
+      checkbox.addEventListener('change', updateAll);
     });
 
-    // Run topping update on page load
-    updateToppings();
-
-    radios.forEach(radio =>{
-      radio.addEventListener('change',() => {
-        selectedSize.textContent =`Selected size: ${radio.value.split(":")[0]}`;
-        totalPrice.textContent = `Total Price: $${radio.value.split(":")[1]}`;
-      });
+    radios.forEach(radio => {
+      radio.addEventListener('change', updateAll);
     });
 
-        </script>
+    // Initialize on page load
+    updateAll();
+</script>
     </body>
 </html>
