@@ -1,96 +1,89 @@
-<body>
+<html>
+    <head>
+    <style>
 
-    <p>Select a snack:</p>
-    <select id="snack" onchange = "priceUpdate(); showTotal();">
-        <option value="none" data-price = "0.00">None</option>
-        <option value="cookies" data-price = "1.50">Cookies</option>
-        <option value="chips" data-price = "1.75">Chips</option>
-    
-    </select>
-    <br>
-    
-    <p>Select a drink:</p>
-    <select id="drink" onchange = "priceUpdateDrink(); showTotal()">
-        <option value="none" data-price = "0.00">None</option>
-        <option value="coke" data-price = "1.50">Coke</option>
-        <option value="pepsi" data-price = "1.75">Pepsi</option>
-    
-    </select>
-    <button onclick="gotocheckout();">submit</button>
-    
-    <p id = "priceDisplay">Snack Price $0.00</p>
-    <p id = "priceDisplayDrink">Drink Price $0.00</p>
-    <p id = "total-price">Total Price $0.00</p>
-    <br>
-    
-    
-    <script>
-    
-    // function #1
-    function priceUpdate(){
-    // first, identify the dropdown
-    const dropdown = document.querySelector('#snack')
-    // second, identify the option chosen by the user
-    const selectedOption = dropdown.options[dropdown.selectedIndex];
-    // third, read the data-price of the selected option
-    const price = selectedOption.getAttribute("data-price");
-    const numericPrice = parseFloat(price); 
-    const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
-    document.getElementById("priceDisplay").innerHTML="Snack Price $: "+"<strong>" +formattedPrice+"</strong>"
-    
-    
-    return numericPrice
-    
-    
+    </style>
+
+    </head>
+
+    <body>
+    <!--size selection-->
+
+    <h3>Choose a size of your choice...</h3>
+
+    <input type= "radio" id= "small" name="pizza_size" value="SMALL:10">
+    <label for= "small"> Small</label><br>
+
+    <input type= "radio" id= "medium" name="pizza_size" value="MEDIUM:12">
+    <label for= "medium"> Medium</label><br>
+
+    <input type= "radio" id= "large" name="pizza_size" value="LARGE:15">
+    <label for= "large"> Large</label><br>
+
+    <!--toppings selection-->
+    <h3>Choose Toppings...</h3>
+
+    <input type="checkbox" id="mushroom" name="toppings" value="MUSHROOM">
+    <label for ="mushroom">Mushroom</label><br>
+
+     <input type="checkbox" id="olive" name="toppings" value="OLIVE">
+    <label for ="olive">Olive</label><br>
+
+     <input type="checkbox" id="bell-pepper" name="toppings" value="BELL-PEPPER">
+    <label for ="bell-pepper">Bell Pepper</label><br>
+
+
+    <!--display the size-->
+
+    <p id ="selectedSize">Selected size: None</p>
+
+    <!--display the total price-->
+    <p id ="totalPrice">Total $: 0.00</p>
+        
+    <!--display the toppings-->
+
+    <p id ="selectedtoppings">Selected Toppings: None</p>
+
+
+        <script>
+            const checkboxes = document.querySelectorAll('input[name="toppings"]');
+    const toppingTag = document.getElementById("selectedtoppings");
+
+    const radios = document.querySelectorAll('input[name="pizza_size"]');
+    const selectedSize = document.getElementById("selectedSize");
+
+    const totalPrice = document.getElementById("totalPrice");
+
+    // Function to update selected toppings
+    function updateToppings() {
+      const selectedToppings = [];
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          selectedToppings.push(checkbox.value);
+        }
+      });
+      if (selectedToppings.length > 0) {
+        toppingTag.textContent = "Topping(s) Selected: " + selectedToppings.join(', ');
+      } else {
+        toppingTag.textContent = "Topping(s) Selected: None";
+      }
     }
-    
-    //function #2 
-    function priceUpdateDrink(){
-    // first, identify the dropdown
-    const dropdown = document.querySelector('#drink')
-    // second, identify the option chosen by the user
-    const selectedOption = dropdown.options[dropdown.selectedIndex];
-    // third, read the data-price of the selected option
-    const price = selectedOption.getAttribute("data-price");
-    const numericPrice = parseFloat(price); 
-    const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
-    document.getElementById("priceDisplayDrink").innerHTML="Drink Price $: "+"<strong>" +formattedPrice+"</strong>"
-    
-    return numericPrice
-    
-    }
-    
-    // function #3 
-    
-    function showTotal(){
-    
-        let total = priceUpdateDrink() + priceUpdate()
-    
-        document.getElementById("total-price").innerHTML = "Total Price $:"+" <strong>" + total+ "</strong>"
-    
-    
 
-    }
-    
-    function gotocheckout(){
-        // get the values of the dropdowns
-        const snack = document.querySelector('#snack').value;
-        const drink = document.querySelector('#drink').value;
+    // Add event listeners to checkboxes
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateToppings);
+    });
 
-        // get the prices
-        const snackPrice = priceUpdate();
-        const drinkPrice = priceUpdateDrink();
-        const total = (snackPrice + drinkPrice).toFixed(2);
+    // Run topping update on page load
+    updateToppings();
 
-        // build the URL with query parameters
-        const url = `checkout.html?snack=${encodeURIComponent(snack)}&drink=${encodeURIComponent(drink)}&total=${total}`;
+    radios.forEach(radio =>{
+      radio.addEventListener('change',() => {
+        selectedSize.textContent =`Selected size: ${radio.value.split(":")[0]}`;
+        totalPrice.textContent = `Total Price: $${radio.value.split(":")[1]}`;
+      });
+    });
 
-        // redirect to checkout.html with parameters
-        window.location.href = url;
-    }
-    
-    
-    
-    </script>
-    
+        </script>
     </body>
+</html>
