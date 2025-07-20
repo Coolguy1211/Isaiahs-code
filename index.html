@@ -39,7 +39,11 @@
 
     <!--display the total price-->
     <p id ="totalPrice">Total $: 0.00</p>
-        
+
+    <!-- Tip input -->
+    <label for="tipInput">Tip $:</label>
+    <input type="number" id="tipInput" min="0" step="0.01" value="0.00">
+
     <!--display the toppings-->
 
     <p id ="selectedtoppings">Selected Toppings: None</p>
@@ -53,6 +57,7 @@
     const selectedSize = document.getElementById("selectedSize");
 
     const totalPrice = document.getElementById("totalPrice");
+    const tipInput = document.getElementById("tipInput");
 
     function getSelectedSizePrice() {
       let price = 0;
@@ -72,6 +77,10 @@
         }
       });
       return price;
+    }
+
+    function getTipAmount() {
+      return parseFloat(tipInput.value) || 0;
     }
 
     function updateAll() {
@@ -98,7 +107,7 @@
       selectedSize.textContent = `Selected size: ${sizeName}`;
 
       // Update total price
-      const total = getSelectedSizePrice() + getSelectedToppingsPrice();
+      const total = getSelectedSizePrice() + getSelectedToppingsPrice() + getTipAmount();
       totalPrice.textContent = `Total Price: $${total.toFixed(2)}`;
     }
 
@@ -110,8 +119,35 @@
       radio.addEventListener('change', updateAll);
     });
 
+    tipInput.addEventListener('input', updateAll);
+
     // Initialize on page load
     updateAll();
+
+    function confirmOrder() {
+    // Get size
+    const size = document.querySelector('input[name="pizza_size"]:checked')?.value.split(':')[0] || 'None';
+    
+    // Get toppings
+    const selectedToppings = [];
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedToppings.push(checkbox.value.split(':')[0]);
+        }
+    });
+    const toppings = selectedToppings.length > 0 ? selectedToppings.join(',') : 'None';
+    
+    // Get prices
+    const subtotal = getSelectedSizePrice() + getSelectedToppingsPrice();
+    const tip = getTipAmount();
+    const total = subtotal + tip;
+    
+    // Redirect with all parameters
+    window.location.href = `end.html?size=${size}&toppings=${toppings}&subtotal=${subtotal.toFixed(2)}&tip=${tip.toFixed(2)}&total=${total.toFixed(2)}`;
+}
 </script>
+
+<br><br>
+<button onclick="confirmOrder()">Confirm Order</button>
     </body>
 </html>
